@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+//가게목록들을 프론트에 JSON으로 뿌리기위한 과정
+//각 URL에 대한 요청을 처리하는 Controller
 @RestController
 public class RestaurantController {
     @GetMapping("/restaurants")

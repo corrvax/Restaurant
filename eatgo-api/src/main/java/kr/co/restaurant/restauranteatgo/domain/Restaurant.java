@@ -21,7 +21,6 @@ public class Restaurant {
         return name + " in " + address;
     }
 
-
     public Long getId() {
         return id ;
     }

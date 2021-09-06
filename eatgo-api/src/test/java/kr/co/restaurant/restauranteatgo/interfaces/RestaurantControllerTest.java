@@ -24,11 +24,11 @@ public class RestaurantControllerTest {
         mvc.perform(get("/restaurants"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(
-                        containsString("id :1004")
+                        containsString("\"id\":1004")
 
                 ))
                 .andExpect(content().string(
-                        containsString("\"name\":\"Korean Restaurant\" ")
+                        containsString("\"name\":\"Korean Restaurant\"")
 
                 ));
     }
