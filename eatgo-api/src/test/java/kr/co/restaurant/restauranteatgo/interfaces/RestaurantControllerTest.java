@@ -1,5 +1,6 @@
 package kr.co.restaurant.restauranteatgo.interfaces;
 
+import kr.co.restaurant.restauranteatgo.application.RestaurantService;
 import kr.co.restaurant.restauranteatgo.domain.MenuItemRepository;
 import kr.co.restaurant.restauranteatgo.domain.MenuItemRepositoryImpl;
 import kr.co.restaurant.restauranteatgo.domain.RestaurantRepositoryIml;
@@ -22,6 +23,8 @@ public class RestaurantControllerTest {
 
     @Autowired
     private MockMvc mvc;
+    @SpyBean(RestaurantService.class)
+    private RestaurantService restaurantService;
     //Controller에 원하는 객체를 주입함
     @SpyBean(RestaurantRepositoryIml.class)
     private RestaurantRepositoryIml restaurantRepository;
