@@ -1,7 +1,9 @@
 package kr.co.restaurant.restauranteatgo.interfaces;
 
+import kr.co.restaurant.restauranteatgo.domain.MenuItem;
+import kr.co.restaurant.restauranteatgo.domain.MenuItemRepository;
 import kr.co.restaurant.restauranteatgo.domain.Restaurant;
-import kr.co.restaurant.restauranteatgo.domain.RestaurantRepositoryIml;
+import kr.co.restaurant.restauranteatgo.domain.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +19,13 @@ public class RestaurantController {
     //private RestaurantRepository repository = new RestaurantRepository();
     //Controller를 생성할 때 Spring이 알아서 RestaurantRepository 생성
     @Autowired
-    private RestaurantRepositoryIml repository;
+    private RestaurantRepository restaurantRepository;
+    @Autowired
+    private MenuItemRepository menuItemRepository;
 
     @GetMapping("/restaurants")
     public List<Restaurant> list() {
-        List<Restaurant> restaurants = repository.findAll();
+        List<Restaurant> restaurants = restaurantRepository.findAll();
         return restaurants;
     }
     //가게 detail API
@@ -29,7 +33,10 @@ public class RestaurantController {
     public Restaurant detail(@PathVariable("id")Long id){
         //레스토랑 정보 repository에서 생성
         //findById(id) id넣을때 해당 레스토랑
-        Restaurant restaurant = repository.findById(id);
+        Restaurant restaurant = restaurantRepository.findById(id);
+
+        List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
+        restaurant.setMenuItems(menuItems);
 
         return restaurant;
     }

@@ -15,7 +15,7 @@ public class RestaurantRepositoryIml implements RestaurantRepository {
     }
     @Override
     public List<Restaurant> findAll() {
-        return null;
+        return restaurants;
     }
 
     @Override

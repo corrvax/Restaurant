@@ -1,5 +1,7 @@
 package kr.co.restaurant.restauranteatgo.interfaces;
 
+import kr.co.restaurant.restauranteatgo.domain.MenuItemRepository;
+import kr.co.restaurant.restauranteatgo.domain.MenuItemRepositoryImpl;
 import kr.co.restaurant.restauranteatgo.domain.RestaurantRepositoryIml;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,19 +23,23 @@ public class RestaurantControllerTest {
     @Autowired
     private MockMvc mvc;
     //Controller에 원하는 객체를 주입함
-    @SpyBean(RestaurantRepositoryIml.classd)
+    @SpyBean(RestaurantRepositoryIml.class)
     private RestaurantRepositoryIml restaurantRepository;
+
+    @SpyBean(MenuItemRepositoryImpl.class)
+    private MenuItemRepository menuItemRepository;
     @Test
     public void list() throws Exception {
         mvc.perform(get("/restaurants"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(
                         containsString("\"id\":1004")
-
                 ))
                 .andExpect(content().string(
                         containsString("\"name\":\"Korean Restaurant\"")
-
+                ))
+                .andExpect(content().string(
+                        containsString("Kimchi")
                 ));
     }
     @Test
@@ -42,21 +48,17 @@ public class RestaurantControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(
                         containsString("\"id\":1004")
-
                 ))
                 .andExpect(content().string(
                         containsString("\"name\":\"Korean Restaurant\"")
-
                 ));
         mvc.perform(get("/restaurants/2020"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(
                         containsString("\"id\":2020")
-
                 ))
                 .andExpect(content().string(
                         containsString("\"name\":\"Cyber Food\"")
-
                 ));
     }
 }
