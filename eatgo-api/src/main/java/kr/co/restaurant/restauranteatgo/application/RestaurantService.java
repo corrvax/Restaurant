@@ -34,7 +34,6 @@ public class RestaurantService {
     }
 
     public Restaurant addRestaurant(Restaurant restaurant) {
-        restaurant.setId(1234L);
-        return restaurant;
+        return restaurantRepository.save(restaurant);
     }
 }

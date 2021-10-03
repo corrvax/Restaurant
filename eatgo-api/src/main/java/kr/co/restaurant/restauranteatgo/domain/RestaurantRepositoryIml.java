@@ -25,4 +25,11 @@ public class RestaurantRepositoryIml implements RestaurantRepository {
                 .findFirst()
                 .orElse(null);//c찾을 식당아이디 없을 경우null
     }
+
+    @Override
+    public Restaurant save(Restaurant restaurant) {
+        restaurants.add(restaurant);
+        restaurant.setId(1234L);
+        return restaurant;
+    }
 }
