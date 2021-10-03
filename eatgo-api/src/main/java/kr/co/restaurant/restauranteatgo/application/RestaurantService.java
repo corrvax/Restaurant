@@ -22,7 +22,8 @@ public class RestaurantService {
     }
 
     public Restaurant getRestaurant(long id){
-        Restaurant restaurant =  restaurantRepository.findById(id);
+        //findById Optional타입으로 변경해서 없으면null(실무에선 에러처리해야함)
+        Restaurant restaurant =  restaurantRepository.findById(id).orElse(null);
         List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
         restaurant.setMenuItems(menuItems);
         return  restaurant;

@@ -1,12 +1,20 @@
 package kr.co.restaurant.restauranteatgo.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
 public class Restaurant {
     private String name;
     private String address;
+
+    @GeneratedValue
+    @Id
     private Long id;
+    @Transient
     private List<MenuItem> menuItems = new ArrayList<>();
     //json형성시 기본constructor생성자 필수
     public Restaurant() {
