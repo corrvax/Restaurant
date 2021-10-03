@@ -67,5 +67,13 @@ public class RestaurantServiceTest {
 
     }
 
+    @Test
+    public void addRestaurant(){
+        Restaurant restaurant = new Restaurant("EunJo","Seoul");
+        Restaurant created = restaurantService.addRestaurant(restaurant);
+
+        assertThat(created.getId(),is(1234L));
+
+    }
 
 }
