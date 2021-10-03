@@ -13,6 +13,7 @@ import java.util.List;
 //가게목록들을 프론트에 JSON으로 뿌리기위한 과정
 //각 URL에 대한 요청을 처리하는 Controller
 //Restcontroller로 인스턴스를 자동으로 생성하여줌
+@CrossOrigin
 @RestController
 public class RestaurantController {
     //private RestaurantRepository repository = new RestaurantRepository();
