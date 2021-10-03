@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.jupiter.api.Assertions.*;
 
 class RestaurantTests {
 
@@ -13,7 +12,7 @@ class RestaurantTests {
     public void creation(){
         //restaurant객체 생성시 "Korean Restuarant"생성
         Restaurant restaurant = new Restaurant(1004L,"Korean Restaurant","Seoul");
-        //Red TDD
+         //Red TDD
         assertThat(restaurant.getId(),is(1004L));
         assertThat(restaurant.getName(),is("Korean Restaurant"));
         assertThat(restaurant.getAddress(),is("Seoul"));
@@ -22,6 +21,8 @@ class RestaurantTests {
     public void information(){
         Restaurant restaurant = new Restaurant(1004L,"Korean Restaurant","Seoul");
         assertThat(restaurant.getInformation(),is("Korean Restaurant in Seoul") );
+
+
     }
 
 }

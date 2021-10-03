@@ -7,6 +7,7 @@ import kr.co.restaurant.restauranteatgo.domain.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -21,6 +22,11 @@ public class RestaurantService {
         this.menuItemRepository = menuItemRepository;
     }
 
+    public List<Restaurant> getRestaurants() {
+        List<Restaurant> restaurants = restaurantRepository.findAll();
+        return restaurants;
+    }
+
     public Restaurant getRestaurant(long id){
         //findById Optional타입으로 변경해서 없으면null(실무에선 에러처리해야함)
         Restaurant restaurant =  restaurantRepository.findById(id).orElse(null);
@@ -29,12 +35,13 @@ public class RestaurantService {
         return  restaurant;
     }
 
-    public List<Restaurant> getRestaurants() {
-        List<Restaurant> restaurants = restaurantRepository.findAll();
-        return restaurants;
-    }
-
     public Restaurant addRestaurant(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
+    }
+    @Transactional
+    public Restaurant updateRestaurant(long id, String name, String address) {
+        Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
+        restaurant.updateInformation(name,address);
+        return restaurant;
     }
 }

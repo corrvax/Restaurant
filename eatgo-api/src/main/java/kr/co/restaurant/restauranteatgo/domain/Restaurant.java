@@ -1,5 +1,9 @@
 package kr.co.restaurant.restauranteatgo.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,18 +11,18 @@ import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Restaurant {
-    private String name;
-    private String address;
-
     @GeneratedValue
     @Id
     private Long id;
+    private String name;
+    private String address;
+
     @Transient
     private List<MenuItem> menuItems = new ArrayList<>();
-    //json형성시 기본constructor생성자 필수
-    public Restaurant() {
-    }
 
     public Restaurant(String name, String address) {
         this.name = name;
@@ -31,20 +35,10 @@ public class Restaurant {
         this.address = address;
     }
 
-    public String getName() {
-        return name;
-    }
-    public String getAddress() {
-        return address;
-    }
-
     public String getInformation() {
         return name + " in " + address;
     }
 
-    public Long getId() {
-        return id ;
-    }
 
     public void setId(long id) {
         this.id = id;
@@ -53,13 +47,15 @@ public class Restaurant {
         menuItems.add(menuItem);
     }
 
-    public List<MenuItem> getMenuItems(){
-        return menuItems;
-    }
 
     public void setMenuItems(List<MenuItem> menuItems) {
         for(MenuItem menuItem: menuItems){
             addMenuItem(menuItem);
         }
+    }
+
+    public void updateInformation(String name, String address) {
+        this.name = name;
+        this.address = address;
     }
 }
