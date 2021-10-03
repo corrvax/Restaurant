@@ -3,10 +3,11 @@ package kr.co.restaurant.restauranteatgo.interfaces;
 import kr.co.restaurant.restauranteatgo.application.RestaurantService;
 import kr.co.restaurant.restauranteatgo.domain.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 //가게목록들을 프론트에 JSON으로 뿌리기위한 과정
@@ -30,13 +31,19 @@ public class RestaurantController {
     public Restaurant detail(@PathVariable("id")Long id){
         //레스토랑 기본정보 + 메뉴 정보 리턴
         Restaurant restaurant = restaurantService.getRestaurant(id);
-        //레스토랑 정보 repository에서 생성
-        //findById(id) id넣을때 해당 레스토랑
-//        Restaurant restaurant = restaurantRepository.findById(id);
-//
-
 
         return restaurant;
+    }
+    @PostMapping("/restaurants")
+    public ResponseEntity<?> create(@RequestBody Restaurant resource)
+            throws URISyntaxException {
+        String name = resource.getName();
+        String address = resource.getAddress();
+
+        Restaurant restaurant = new Restaurant(1234L, name, address);
+        restaurantService.addRestaurant(restaurant);
+        URI location = new URI("/restaurants/"+restaurant.getId());
+        return ResponseEntity.created(location).body("{}") ;
     }
 
 }
